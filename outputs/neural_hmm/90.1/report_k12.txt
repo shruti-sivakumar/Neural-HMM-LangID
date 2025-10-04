@@ -1,0 +1,145 @@
+python -m src.scripts.train_neural_hmm \
+  --states 12 \
+  --emb_dim 128 \
+  --hidden 256 \
+  --context 3 \
+  --epochs 80 \
+  --batch_size 16 \
+  --lr 5e-4 \
+  --weight_decay 1e-4 \
+  --dropout 0.3 \
+  --seed 42
+
+Dev accuracy (Neural-HMM, K=12): 0.901
+
+Confusion Matrix (Dev set):
+true\pred    ca    da    de    en    es    fi    fr    is    it    nl    nr    pt    ro    sv
+ca          15     0     0     0     2     0     4     0     1     0     0     1     0     0
+da           0   197     0     0     0     0     0     0     0     8    91     0     1    15
+de           0     0    45     1     0     0     1     0     0     8     0     0     0     1
+en           0     1     0   441     4     0     7     0     0    40     0     2     0     9
+es           0     0     0     0   456     0     0     0     0     1     0    10     0     0
+fi           0     0     0     0     0   177     0     0     0     0     2     0     0    38
+fr           0     0     0     1     6     0   520     0     1     4     0    11     2     1
+is           0     0     0     0     0     0     0    17     0     0     0     0     0     0
+it           0     0     0     0    14     0     5     0    68     1     0    17     0     0
+nl           0     0     1     3     0     0     3     0     0   351     0     0     0     1
+nr           0    11     0     3     0     0     0     0     0     7   271     0     0    13
+pt           0     0     0     0     9     0     2     0     0     1     0   267     0     0
+ro           0     0     0     0     0     0     0     0     1     0     0     0   134     0
+sv           0     0     0     0     1     0     0     0     0     1     0     0     0   376
+
+True  Pred        ca       da       de       en       es       fi       fr       is       it       nl       nr       pt       ro       sv  Sentence
+------------------------------------------------------------------------------------------------------------------------
+ca   es       -0.3    -14.5    -18.2    -17.5     -0.1    -24.8    -16.7    -15.6    -15.0    -16.4    -16.4     -0.7    -15.9    -17.5  La família sopa a la casa petita.
+ca   fr       -0.1     -0.7     -0.3     -0.1     -0.1     -5.6     -0.0    -20.3     -0.3     -0.3     -0.9     -0.2     -0.2     -0.1  Els nens juguen al parc verd.
+ca   es       -0.5    -27.8    -13.9    -29.8     -0.1    -32.4    -11.8    -56.5     -5.5     -0.9    -11.9     -0.2    -11.1    -13.5  El tren arriba a l'estació central.
+ca   es       -0.0    -22.7    -14.5    -13.4     -0.0    -36.0    -13.9    -28.2     -8.1    -13.3    -13.4     -0.5    -22.3    -14.4  Aquest matí plou a la ciutat.
+ca   sv       -0.1    -13.4    -11.7     -1.5     -0.2    -12.7     -0.1     -9.5     -1.9     -0.9     -0.8     -0.2     -3.8     -0.1  El museu és a prop del riu.
+ca   fr       -0.0    -15.8     -0.2    -18.0     -0.0    -11.3     -0.0    -35.4     -0.0     -0.2    -11.7     -0.2     -0.1     -0.0  Ella treballa a l'hospital local.
+ca   fr       -0.1    -10.0     -9.6    -10.6     -9.4    -31.4     -0.1    -50.0     -0.1     -0.2     -7.5     -0.4     -2.5     -4.4  Ens vam trobar amb amics al cafè.
+ca   it       -0.3     -0.6     -0.8     -0.2     -0.1    -12.3     -0.1    -21.7     -0.0     -1.1     -0.8     -0.2     -0.2     -0.1  El restaurant tanca a les nou.
+da   en       -0.0     -0.0     -0.0     -0.0     -0.0     -0.2     -0.0     -0.5     -0.1     -0.0     -0.0     -0.0     -0.0     -0.0  Familien spiser aftensmad i det lille hus.
+da   da      -49.9     -0.1    -28.3    -29.7    -37.3    -23.0    -28.2    -29.8    -38.4    -25.0     -0.1    -19.6    -24.6    -27.5  Børnene leger i den grønne park.
+da   sv      -33.5    -12.8    -16.9    -16.0    -31.1    -14.6    -13.0    -13.1    -20.9    -14.2     -9.4    -14.7    -24.2     -0.0  Toget ankommer til hovedbanegården.
+da   fr       -0.2     -0.1     -2.3     -0.1     -0.1     -0.9     -0.0     -0.4     -4.9     -0.0     -0.1     -0.3     -4.9     -0.0  Det regner i byen her til morgen.
+da   sv      -20.6     -6.3    -17.9    -23.5    -17.0    -20.2    -23.4    -11.4    -18.5    -17.8     -6.4    -17.2    -20.1     -1.0  Museet ligger tæt på floden.
+da   sv      -32.9     -6.8     -9.1     -9.0    -27.7     -6.7     -8.4     -8.0    -20.5     -7.2     -6.9     -8.3    -12.9     -0.1  Hun arbejder på det lokale hospital.
+da   nr      -31.1    -23.1    -40.6    -28.1    -18.7    -38.5    -23.4    -50.7    -25.6    -21.9     -6.2    -21.5    -30.5    -15.2  Vi mødte venner på caféen.
+da   en      -77.9     -0.2     -0.0     -0.0    -71.0     -0.1     -2.4     -0.4    -26.5     -0.0     -0.1     -0.3    -20.3     -0.0  Restauranten lukker klokken ni.
+de   en      -18.4     -0.1     -0.0     -0.0    -15.0     -0.7     -0.8     -1.3     -9.9     -0.0     -0.1     -0.1     -3.6     -0.0  Die Familie isst Abendessen im kleinen Haus.
+de   de      -22.5     -7.2     -0.0    -16.7    -13.8    -14.3     -7.0    -19.4    -22.4     -0.0    -10.5    -14.1    -19.9    -17.4  Die Kinder spielen im grünen Park.
+de   sv      -15.4     -0.1     -0.4     -0.2    -11.4     -6.8     -0.9     -0.5     -5.2     -0.1     -0.2     -0.2     -5.0     -0.0  Der Zug kommt am Hauptbahnhof an.
+de   es       -0.1     -0.0     -0.0     -0.1     -0.0     -0.1     -0.0     -0.6     -0.2     -0.0     -0.0     -0.0     -0.1     -0.0  Heute Morgen regnet es in der Stadt.
+de   fr       -0.1     -0.2     -0.1     -0.0     -0.1     -0.3     -0.0     -2.3     -0.9     -0.1     -0.4     -0.1     -0.1     -0.1  Das Museum liegt nahe am Fluss.
+de   sv      -37.3     -7.6     -0.0    -11.3    -30.5    -16.0    -14.0    -25.7    -19.5     -0.6     -4.9     -8.8    -19.7     -0.0  Sie arbeitet im örtlichen Krankenhaus.
+de   sv       -0.4    -11.3     -6.9     -1.8     -0.2     -8.7     -0.1     -8.0     -1.4     -0.1     -0.2     -0.2     -5.1     -0.0  Wir trafen Freunde im Café.
+de   de      -16.4    -15.1     -0.1    -16.9    -17.8    -29.0    -18.5    -32.3    -21.0    -15.6    -18.1    -17.8    -14.9    -15.4  Das Restaurant schließt um neun Uhr.
+en   en       -0.2     -0.0     -1.3     -0.0     -0.0     -0.5     -0.1     -0.9     -2.0     -0.0     -0.1     -0.3     -4.3     -0.0  The family eats dinner in the small house.
+en   en      -11.2     -0.0     -1.0     -0.0    -11.6     -9.5     -1.0    -34.1    -10.5     -0.0     -0.1     -0.3     -9.1     -0.0  The children play in the green park.
+en   en       -0.2     -0.0     -0.1     -0.0     -0.0     -8.6     -0.1    -27.6     -0.3     -0.0     -0.1     -0.3     -0.1     -0.0  The train arrives at the central station.
+en   es       -0.5     -0.4     -0.9     -0.3     -0.1     -9.7     -0.1    -29.3     -1.7     -0.5     -0.5     -0.3     -4.7     -0.1  It rains in the city this morning.
+en   en       -0.2     -0.1     -0.1     -0.0     -0.0    -11.5     -0.1    -27.1     -0.3     -0.0     -0.1     -0.3     -0.1     -0.0  The museum is close to the river.
+en   en      -29.7     -0.1     -0.1     -0.0    -29.1    -23.1     -3.2    -36.5    -20.8     -0.0     -0.1     -2.3    -18.6     -0.9  She works at the local hospital.
+en   pt       -0.3    -11.7     -8.1     -1.7     -0.1    -15.3     -0.1    -30.9     -1.0     -0.2     -0.3     -0.1     -5.8     -0.1  We met friends at the café.
+en   en       -8.8     -0.1     -0.1     -0.0    -10.6    -26.8     -0.9    -51.3     -6.0     -0.0     -0.1     -0.3     -5.3     -0.0  The restaurant closes at nine o’clock.
+es   es      -14.6    -30.3    -17.8    -15.4     -0.1    -48.7     -2.0    -54.5     -2.3    -15.4    -14.8    -17.9    -32.9    -16.7  La familia cena en la casa pequeña.
+es   es      -15.1    -35.7    -16.0    -16.6     -0.1    -28.7     -2.2    -31.4     -2.2    -15.9    -14.5    -14.7    -33.6    -16.1  Los niños juegan en el parque verde.
+es   es       -0.5    -16.7    -15.2    -16.7     -0.1    -37.6    -14.0    -42.7    -12.6     -1.0     -5.0     -0.2    -14.9    -14.6  El tren llega a la estación central.
+es   es      -20.2    -18.9    -17.3    -17.7     -0.0    -29.6     -2.4    -29.8     -6.8    -16.4    -14.5    -16.4    -18.9    -16.7  Esta mañana llueve en la ciudad.
+es   es      -14.1    -16.4    -21.8    -25.5     -0.1    -36.2    -26.2    -33.5    -17.6    -13.3    -13.5     -0.5    -20.8    -27.6  El museo está cerca del río.
+es   fr       -0.0     -0.1     -0.1     -0.2     -0.0    -11.6     -0.0    -20.0     -0.0     -0.2     -0.2     -0.2     -0.1     -0.0  Ella trabaja en el hospital local.
+es   fr       -0.3    -11.6     -7.7     -1.7     -0.1    -40.7     -0.1    -66.7     -1.3     -0.1     -0.2     -0.1     -5.8     -0.1  Nos encontramos con amigos en el café.
+es   it       -0.3     -0.6     -0.8     -0.2     -0.1    -13.5     -0.1    -23.6     -0.0     -1.1     -0.8     -0.2     -0.2     -0.1  El restaurante cierra a las nueve.
+fi   sv      -29.7    -10.6     -1.8    -24.3    -30.2     -0.0    -31.1    -10.7    -20.4     -1.5     -4.0    -21.8    -16.4     -0.0  Perhe syö illallista pienessä talossa.
+fi   sv      -61.4    -22.3     -0.1    -41.7    -69.6     -0.1    -44.3    -31.4    -54.1     -0.4     -1.2    -39.3    -37.5     -0.0  Lapset leikkivät vihreässä puistossa.
+fi   fi      -20.1     -8.0     -0.0    -21.7    -18.3     -0.0    -21.6    -19.1    -19.9     -0.2     -1.1    -19.5    -14.5     -0.0  Juna saapuu päärautatieasemalle.
+fi   sv      -35.0     -8.3     -0.1    -17.2    -35.7     -0.0    -18.2    -16.9    -30.0     -0.6     -4.2    -16.3    -19.1     -0.0  Tänä aamuna sataa kaupungissa.
+fi   fi      -41.8     -7.5     -0.0    -26.9    -47.9     -0.0    -28.3    -29.8    -41.0     -0.2     -0.7    -23.2    -25.3     -0.0  Museo on lähellä jokea.
+fi   sv      -63.6    -12.9     -2.1    -26.1    -64.3     -0.1    -25.4     -9.8    -44.5     -2.3    -10.6    -19.5    -26.9     -0.0  Hän työskentelee paikallisessa sairaalassa.
+fi   sv      -35.6    -15.5     -1.4    -24.5    -34.8     -0.1    -30.2    -26.7    -35.6     -0.3     -1.4    -21.4    -27.8     -0.0  Tapasimme ystäviä kahvilassa.
+fi   sv      -65.2     -2.4     -0.5    -14.8    -67.6     -0.0    -16.9    -11.2    -43.6     -0.1     -0.4    -13.7    -28.2     -0.0  Ravintola sulkee kello yhdeksän.
+fr   fr      -20.0    -13.4    -13.1    -15.9    -15.1    -15.6     -0.0    -11.3    -12.9     -3.9    -16.8    -13.1     -0.1    -13.8  La famille dîne dans la petite maison.
+fr   fr       -0.2     -0.3     -0.1     -0.0     -0.0     -6.2     -0.0    -20.4     -0.2     -0.1     -0.3     -0.2     -0.1     -0.2  Les enfants jouent dans le parc vert.
+fr   fr       -1.0     -9.1     -7.9     -2.7     -3.4    -19.7     -0.1    -24.2     -0.2     -0.3     -1.3     -1.5     -0.2     -0.3  Le train arrive à la gare centrale.
+fr   it       -0.1     -0.8     -0.9     -0.1     -0.1     -6.7     -0.1    -21.6     -0.0     -1.0     -0.8     -0.2     -0.1     -0.1  Il pleut dans la ville ce matin.
+fr   fr       -0.3    -43.4    -44.7    -36.9    -29.7    -43.6     -0.1    -44.0     -4.2     -0.3    -11.0     -0.2    -10.8     -8.6  Le musée est près de la rivière.
+fr   fr      -10.5    -19.9    -21.2    -19.6    -18.5    -31.2     -0.0    -30.1    -10.5     -7.9    -14.1     -2.8    -13.2    -16.5  Elle travaille à l’hôpital local.
+fr   es       -0.1    -22.6    -18.4     -3.0     -0.0    -40.9     -0.0    -59.0     -1.1     -0.1     -0.6     -0.0    -11.0     -0.0  Nous avons rencontré des amis au café.
+fr   fr       -0.6     -8.6     -9.0     -4.6     -3.4    -10.7     -0.1     -5.5     -0.1     -0.4     -2.5     -1.7     -0.1     -0.3  Le restaurant ferme à neuf heures.
+is   is      -74.0    -54.0    -43.4    -66.3    -70.3    -41.3    -62.6     -0.6    -77.8    -30.1    -40.3    -38.3    -61.7    -42.6  Fjölskyldan borðar kvöldmat í litla húsinu.
+is   is      -65.6    -45.9    -49.1    -55.1    -59.9    -51.5    -54.5     -8.5    -61.6    -39.2    -26.1    -36.4    -54.1    -29.4  Börnin leika sér í græna garðinum.
+is   is      -74.1    -45.7    -38.9    -49.0    -57.5    -39.6    -55.4     -0.4    -54.2    -29.5    -25.8    -35.6    -45.3    -39.0  Lestinn kemur á aðalstöðina.
+is   es       -1.4     -8.5    -12.0     -8.8     -0.7    -11.4    -10.3     -2.0    -10.7     -9.3     -9.2     -1.2     -8.6     -8.0  Í morgun rigndi í borginni.
+is   is      -52.6    -35.7    -41.9    -52.0    -27.5    -49.7    -55.1     -0.1    -55.4    -24.9    -10.4    -23.2    -43.9    -43.4  Safnið er nálægt ánni.
+is   is      -46.2    -66.7    -56.6    -66.3    -36.1    -65.1    -61.4     -0.4    -61.8    -31.6    -41.8    -18.2    -62.8    -67.7  Hún vinnur á staðbundnu sjúkrahúsi.
+is   is      -28.4    -34.3    -33.5    -37.8    -20.4    -38.1    -36.6     -0.6    -38.0    -15.9    -20.0     -9.6    -32.2    -35.1  Við hittum vini á kaffihúsinu.
+is   is      -85.1    -27.1    -31.2    -28.6    -78.0    -33.4    -33.4     -0.1    -54.8    -27.3    -22.6    -19.0    -42.5    -31.8  Veitingastaðurinn lokar klukkan níu.
+it   fr       -0.3     -0.2     -0.3     -0.1     -0.1    -38.3     -0.0    -64.7     -0.1     -0.2     -0.2     -0.1     -0.1     -0.1  La famiglia cena nella casa piccola.
+it   de       -1.2     -2.2     -0.6     -2.6     -1.5    -27.7     -0.9    -47.8     -2.6     -2.2     -2.3     -1.2     -2.6     -1.5  I bambini giocano nel parco verde.
+it   it       -2.3     -5.3     -1.0     -0.2     -0.1    -18.3     -0.2    -25.1     -0.1     -0.8     -2.2     -0.2     -0.3     -0.1  Il treno arriva alla stazione centrale.
+it   fr       -2.7    -11.5     -8.3     -8.5     -4.8    -27.1     -0.0    -28.7     -0.9     -0.2     -6.5     -5.0     -0.0     -2.5  Questa mattina piove in città.
+it   it       -0.1     -8.0    -11.9     -7.4    -10.7    -24.3     -0.2    -32.2     -0.0     -0.9     -6.2     -0.9     -1.5     -4.9  Il museo è vicino al fiume.
+it   fr       -0.1    -14.5     -0.0    -19.1     -0.0    -10.1     -0.0    -34.9     -0.1     -0.0    -10.6     -0.1     -0.1     -0.1  Lei lavora all'ospedale locale.
+it   fr       -0.1     -8.8    -10.0    -11.1     -8.2    -52.9     -0.0    -73.2     -0.1     -0.1     -6.7     -0.4     -2.2     -4.8  Abbiamo incontrato amici al caffè.
+it   it       -0.3     -0.6     -0.8     -0.2     -0.1    -13.7     -0.1    -28.8     -0.0     -1.1     -0.8     -0.2     -0.2     -0.1  Il ristorante chiude alle nove.
+nl   nl      -19.9     -3.3     -0.2     -0.1    -15.4     -4.6     -0.8     -1.4     -9.3     -0.0     -0.3     -0.4     -3.6     -0.1  Het gezin eet avondeten in het kleine huis.
+nl   en      -25.9     -0.2     -0.5     -0.1    -24.0     -0.4     -1.8     -0.4    -11.4     -0.2     -0.2     -0.2     -7.1     -0.2  De kinderen spelen in het groene park.
+nl   en      -16.1     -0.3     -0.5     -0.1    -13.5    -12.6     -0.9    -20.2     -4.7     -0.2     -0.2     -0.1     -5.0     -0.1  De trein komt aan op het centraal station.
+nl   fr       -0.2     -0.1     -0.2     -0.1     -0.1     -0.2     -0.0     -0.6     -0.2     -0.0     -0.1     -0.3     -0.1     -0.0  Het regent vanmorgen in de stad.
+nl   fr       -0.2     -0.1     -0.2     -0.1     -0.1    -12.2     -0.0    -23.9     -0.3     -0.0     -0.1     -0.3     -0.1     -0.1  Het museum ligt dicht bij de rivier.
+nl   nl      -67.5     -1.7     -0.4     -0.2    -63.2    -18.9     -4.1    -18.1    -35.5     -0.1     -0.1     -1.7    -28.3     -0.5  Zij werkt in het plaatselijke ziekenhuis.
+nl   fr       -0.4    -11.8     -8.0     -1.7     -0.1    -18.1     -0.0    -24.7     -1.0     -0.2     -0.3     -0.1     -5.8     -0.2  We ontmoetten vrienden in het café.
+nl   fr       -0.2     -0.1     -0.2     -0.1     -0.1     -0.2     -0.0     -0.3     -0.2     -0.0     -0.1     -0.3     -0.1     -0.0  Het restaurant sluit om negen uur.
+nr   en       -0.1     -0.0     -0.0     -0.0     -0.0     -0.1     -0.0     -0.4     -0.1     -0.0     -0.0     -0.0     -0.0     -0.0  Familien spiser middag i det lille huset.
+nr   nr      -58.8     -0.0    -16.5    -17.8    -51.9    -13.6    -18.2    -16.7    -32.0    -14.8     -0.0    -12.1    -25.8    -17.3  Barna leker i den grønne parken.
+nr   sv      -19.6     -0.0     -0.9     -0.1    -17.6     -0.1     -0.8     -0.1     -6.2     -0.0     -0.0     -0.1     -9.0     -0.0  Toget ankommer til sentralstasjonen.
+nr   sv       -1.4     -2.3     -3.3     -1.6     -0.7     -1.7     -1.0     -2.1     -7.6     -1.4     -2.1     -0.8     -6.5     -0.7  I morges regnet det i byen.
+nr   da      -11.3     -0.1     -8.8    -13.3    -13.0    -12.8    -12.1     -1.1    -12.7    -11.3     -0.4     -9.2    -11.5     -1.0  Museet ligger nær elven.
+nr   sv      -54.1     -6.8    -13.5     -8.9    -47.4     -8.2     -9.1     -8.3    -25.1     -7.2     -6.9     -8.4    -18.4     -0.1  Hun jobber på det lokale sykehuset.
+nr   nr      -41.8     -6.5    -24.7    -22.6    -28.6    -23.4    -22.9    -25.1    -29.5    -21.3     -6.4    -19.9    -21.0    -15.2  Vi møtte venner på kafeen.
+nr   en      -47.5     -0.2     -0.0     -0.0    -43.5     -0.1     -1.6     -0.4    -18.0     -0.0     -0.1     -0.1    -13.0     -0.0  Restauranten stenger klokken ni.
+pt   es       -2.3    -33.5    -21.0    -18.7     -1.6    -48.0    -17.4    -31.8    -17.7    -18.3    -19.1     -1.8    -36.2    -19.7  A família janta na casa pequena.
+pt   pt      -20.7    -35.9    -22.0    -17.6    -18.8    -56.6     -0.2    -73.7    -17.7    -17.5    -18.5     -0.1    -35.3    -17.5  As crianças brincam no parque verde.
+pt   pt      -29.8    -35.3    -29.8    -30.6    -32.3    -54.8    -12.4    -75.0    -24.5    -23.9    -28.4     -5.7    -27.0    -23.8  O trem chega à estação central.
+pt   pt      -12.1    -10.8     -6.7    -11.2    -10.9    -21.6     -7.6    -22.0     -7.8    -14.2    -11.9     -0.1     -9.2    -13.1  Chove na cidade esta manhã.
+pt   pt       -0.8     -1.9     -0.9     -1.6     -0.7     -8.5     -0.7    -20.1     -3.2     -1.6     -1.8     -0.6     -2.0     -0.7  O museu fica perto do rio.
+pt   fr       -0.0     -0.1     -0.1     -0.0     -0.0    -11.3     -0.0    -18.8     -0.0     -0.1     -0.2     -0.1     -0.1     -0.0  Ela trabalha no hospital local.
+pt   fr       -0.2    -12.2     -7.6     -1.7     -0.1    -26.6     -0.0    -46.2     -0.9     -0.1     -0.8     -0.1     -5.8     -0.0  Encontramos amigos no café.
+pt   fr       -1.3    -13.9     -9.6     -6.9     -4.8    -21.6     -0.9    -30.4     -2.7     -1.3     -6.3     -7.2     -1.7     -1.4  O restaurante fecha às nove horas.
+ro   ro      -26.5    -19.3    -16.4    -19.3    -21.7    -47.6    -12.0    -66.4    -20.0    -15.9    -24.2    -22.0     -0.0    -21.5  Familia ia cina în casa mică.
+ro   ro      -25.4    -16.5    -14.6    -16.0    -20.1    -36.7    -13.5    -57.8    -18.7    -11.9    -17.2    -18.4     -0.0    -18.5  Copiii se joacă în parcul verde.
+ro   ro      -27.1    -26.8    -25.0    -27.7    -33.0    -40.0    -30.5    -42.7    -32.4    -31.1    -30.6    -30.3     -0.0    -29.3  Trenul sosește la gara centrală.
+ro   ro      -73.2    -61.3    -57.6    -60.6    -70.4    -80.8    -55.8    -89.2    -61.6    -58.0    -74.5    -70.3     -0.6    -66.4  În această dimineață plouă în oraș.
+ro   fr      -13.6    -14.5     -8.5     -5.5    -12.5    -15.4     -0.1    -19.0     -8.2     -2.0    -13.0     -6.0     -0.1    -13.5  Muzeul este aproape de râu.
+ro   ro      -12.5    -12.6    -13.3     -9.0    -14.4    -40.3    -15.1    -51.4     -9.3    -10.8    -13.9    -13.3     -0.2    -10.6  Ea lucrează la spitalul local.
+ro   ro      -46.2    -26.6    -29.9    -20.3    -25.9    -47.9     -0.1    -70.4    -26.6    -10.8    -28.4    -14.0     -0.0    -29.0  Ne-am întâlnit cu prieteni la cafenea.
+ro   ro      -29.3    -24.7    -22.3    -21.2    -25.6    -36.7    -11.0    -41.4    -23.7    -17.8    -29.7    -26.5     -0.1    -25.9  Restaurantul se închide la ora nouă.
+sv   de      -12.7     -5.8     -0.0    -13.1    -15.6     -0.1    -16.7    -11.9    -17.1     -0.1     -0.1    -12.9    -11.2     -0.0  Familjen äter middag i det lilla huset.
+sv   sv      -55.4     -9.3     -0.0    -15.8    -50.6     -0.1    -16.6     -0.1    -28.0     -0.6     -4.3    -12.6    -27.2     -0.0  Barnen leker i den gröna parken.
+sv   sv      -27.0     -9.9    -15.7    -28.5    -28.5    -20.0    -25.6    -42.5    -32.9    -10.2     -6.8    -24.9    -25.4     -0.0  Tåget anländer till centralstationen.
+sv   sv       -1.4     -2.3     -1.1     -1.6     -0.7     -1.1     -1.0     -2.0     -3.3     -1.4     -2.1     -0.8     -2.0     -0.7  I morse regnade det i staden.
+sv   de      -11.7     -6.6     -0.0    -14.9    -14.2     -0.2    -14.0    -11.9    -16.7     -0.1     -0.6    -10.4    -10.1     -0.0  Museet ligger nära floden.
+sv   sv      -52.1     -6.8     -9.0     -8.7    -44.9     -6.9     -9.1     -7.8    -27.1     -7.1     -6.7     -8.1    -21.4     -0.0  Hon arbetar på det lokala sjukhuset.
+sv   sv      -33.0    -34.0    -22.7    -40.6    -35.1    -24.4    -41.2    -54.9    -46.4     -7.2     -6.6    -31.6    -35.7     -0.0  Vi träffade vänner på caféet.
+sv   sv      -47.0     -4.4     -0.0    -16.6    -45.9    -13.3    -19.8    -36.5    -31.5     -0.1     -0.3    -11.7    -17.3     -0.0  Restaurangen stänger klockan nio.

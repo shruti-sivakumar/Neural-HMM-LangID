@@ -74,6 +74,7 @@ def main():
     ap.add_argument("--lr", type=float, default=1e-3)
     ap.add_argument("--weight_decay", type=float, default=1e-5)
     ap.add_argument("--dropout", type=float, default=0.0, help="Dropout prob in emission MLP (0 disables)")
+    ap.add_argument("--patience", type=int, default=10, help="Early stopping patience (epochs with no dev improvement)")
 
     ap.add_argument("--device", type=str, default="cuda" if torch.cuda.is_available() else "cpu")
     ap.add_argument("--outdir", type=Path, default=Path("outputs/neural_hmm"))
@@ -146,6 +147,8 @@ def main():
 
         best = math.inf
         ckpt = args.outdir / f"{lg}_k{args.states}.pt"
+        patience = args.patience
+        bad_epochs = 0
 
         # ---- Train ----
         for ep in range(1, args.epochs + 1):
@@ -173,8 +176,15 @@ def main():
             if dev_loss < best:
                 best = dev_loss
                 torch.save(model.state_dict(), ckpt)
+                bad_epochs = 0
+            else:
+                bad_epochs += 1
 
             print(f"[{lg}] epoch {ep:02d} | train_nll={train_nll:.3f} dev_nll={dev_loss:.3f} (best={best:.3f})")
+
+            if bad_epochs >= patience:
+                print(f"[{lg}] Early stopping triggered at epoch {ep}")
+                break
 
         # load best
         model.load_state_dict(torch.load(ckpt, map_location=args.device))
