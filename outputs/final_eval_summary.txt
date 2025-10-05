@@ -1,0 +1,4 @@
+Model	CleanEval	NoisyEval
+MC	0.848	0.429
+HMM(K=12)	0.696	0.446
+Neural-HMM	0.482	0.232
